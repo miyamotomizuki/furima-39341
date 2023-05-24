@@ -30,7 +30,7 @@
 | status        | integer    | null: false                    |
 | shipping_cost | integer    | null: false                    |
 | region        | integer    | null: false                    |
-| days          | integer    | null: false                    |
+| shipping_date | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
 ### Association
