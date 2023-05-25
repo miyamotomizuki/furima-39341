@@ -21,17 +21,17 @@
 
 ## products テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| name          | string     | null: false                    |
-| explain       | text       | null: false                    |
-| price         | integer    | null: false                    |
-| category      | integer    | null: false                    |
-| status        | integer    | null: false                    |
-| shipping_cost | integer    | null: false                    |
-| region        | integer    | null: false                    |
-| shipping_date | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| name             | string     | null: false                    |
+| explain          | text       | null: false                    |
+| price            | integer    | null: false                    |
+| category_id      | integer    | null: false                    |
+| status_id        | integer    | null: false                    |
+| shipping_cost_id | integer    | null: false                    |
+| region_id        | integer    | null: false                    |
+| shipping_date_id | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -56,12 +56,12 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| post_code    | integer    | null: false                    |
+| post_code    | string     | null: false                    |
 | city         | string     | null: false                    |
 | block        | string     | null: false                    |
 | building     | string     |                                |
 | phone        | string     | null: false                    |
-| region       | integer    | null: false                    |
+| region_id    | integer    | null: false                    |
 | order        | references | null: false, foreign_key: true |
 
 ### Association
