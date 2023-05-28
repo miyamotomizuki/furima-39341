@@ -10,7 +10,8 @@ class Product < ApplicationRecord
   has_one_attached :image
 
 
-  validates :name, :explain, :price, presence: true
+  validates :name, :explain, :image, presence: true
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
   validates :region_id, :status_id, :shipping_date_id, :shipping_cost_id, :category_id, numericality: { other_than: 1, message: "can't be blank"} 
 
 end
