@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   before do
     @product = FactoryBot.build(:product)
-    @product.image = fixture_file_upload('app/assets/images/star.png')
-
   end
 
   describe '商品出品機能' do
@@ -23,7 +21,11 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include{"Image can't be blank"}
       end
-
+      it 'userが紐付いていなければ出品できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
+      end
       it '商品名がないと登録できない' do
         @product.name = ''
         @product.valid?
@@ -37,31 +39,31 @@ RSpec.describe Product, type: :model do
       end
 
       it 'カテゴリーの情報がないと登録できない' do
-        @product.category_id = ''
+        @product.category_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態についての情報がないと登録できない' do
-        @product.status_id = ''
+        @product.status_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Status can't be blank")
       end
 
       it '配送料の負担についての情報がないと登録できない' do
-        @product.shipping_cost_id = ''
+        @product.shipping_cost_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping cost can't be blank")
       end
 
       it '発送元の地域についての情報がないと登録できないと' do
-        @product.region_id = ''
+        @product.region_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Region can't be blank")
       end
 
       it '発送までの日数についての情報がないと登録できないと' do
-        @product.shipping_date_id = ''
+        @product.shipping_date_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping date can't be blank")
       end
