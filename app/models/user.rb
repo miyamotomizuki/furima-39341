@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
   validates :family_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
-  validates :family_name,  presence: true, allow_blank: true
+  validates :family_name, presence: true, allow_blank: true
   validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
   validates :first_name, presence: true, allow_blank: true
   validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
