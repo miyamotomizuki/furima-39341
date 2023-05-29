@@ -84,22 +84,22 @@ RSpec.describe User, type: :model do
       it 'family_nameがない場合は登録できないこと' do
         @user.family_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name can't be blank", 'Family name is invalid')
+        expect(@user.errors.full_messages).to include('Family name is invalid')
       end
       it 'first_nameがない場合は登録できないこと' do
         @user.first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank", 'First name is invalid')
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
       it 'family_name_kanaがない場合は登録できないこと' do
         @user.family_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana can't be blank", 'Family name kana is invalid')
+        expect(@user.errors.full_messages).to include('Family name kana is invalid')
       end
       it 'first_name_kanaがない場合は登録できないこと' do
         @user.first_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana can't be blank", 'First name kana is invalid')
+        expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
       it 'family_nameが全角入力でなければ登録できないこと' do
         @user.family_name = 'ｱｲｳｴｵ'

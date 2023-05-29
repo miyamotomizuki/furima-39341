@@ -15,4 +15,6 @@ class User < ApplicationRecord
   validates :first_name_kana, presence: true, allow_blank: true
   validates :birthday, presence: true
   validates :password, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{8,}\z/ }, allow_blank: true
+
+  has_many :products
 end
