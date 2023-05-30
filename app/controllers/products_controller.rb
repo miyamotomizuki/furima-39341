@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :move_to_index, except: [:index, :show]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -30,7 +29,4 @@ class ProductsController < ApplicationController
                                     :shipping_date_id, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    redirect_to root_path unless user_signed_in?
-  end
 end
