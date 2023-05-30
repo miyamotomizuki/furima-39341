@@ -7,7 +7,7 @@ RSpec.describe Product, type: :model do
 
   describe '商品出品機能' do
     context '出品ができる時' do
-      it "必須項目が全てあれば登録できること" do
+      it '必須項目が全てあれば登録できること' do
         expect(@product).to be_valid
       end
       it 'ログイン状態のユーザーのみ、商品出品ページへ遷移できること' do
@@ -19,12 +19,12 @@ RSpec.describe Product, type: :model do
       it '商品画像を添付しないと登録できない' do
         @product.image = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include{"Image can't be blank"}
+        expect(@product.errors.full_messages).to include { "Image can't be blank" }
       end
       it 'userが紐付いていなければ出品できない' do
         @product.user = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("User must exist")
+        expect(@product.errors.full_messages).to include('User must exist')
       end
       it '商品名がないと登録できない' do
         @product.name = ''
@@ -77,19 +77,19 @@ RSpec.describe Product, type: :model do
       it '販売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
         @product.price = '100'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is invalid")
+        expect(@product.errors.full_messages).to include('Price is invalid')
       end
 
       it '販売価格は、¥300~¥9,999,999の間のみ保存可能であること' do
         @product.price = '10,000,000'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is invalid")
+        expect(@product.errors.full_messages).to include('Price is invalid')
       end
 
       it '販売価格は半角数字のみ保存可能であること' do
         @product.price = '１００００'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is invalid")
+        expect(@product.errors.full_messages).to include('Price is invalid')
       end
     end
   end
