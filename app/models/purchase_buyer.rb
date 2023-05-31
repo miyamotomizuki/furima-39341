@@ -14,6 +14,8 @@ class PurchaseBuyer
   validates :region_id, numericality: {other_than: 1, message: "can't be blank"}
   
   def save
+    purchase = Purchase.create(user_id: user_id, product_id: product_id)
+    Buyer.create(post_code: post_code, city: city, block: block, building: building, phone: phone, region_id: region_id,purchase_id: purchase.id)
   end
 
 
