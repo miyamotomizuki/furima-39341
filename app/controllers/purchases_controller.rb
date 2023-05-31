@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
   def
-    @purchase_buyer = PurchaseBuyer.new
+    @purchase_buyers = PurchaseBuyer.new
   end
 end
