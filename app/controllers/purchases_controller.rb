@@ -1,7 +1,13 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :sold
+  
   def index
-    @product = Product.find(params[:product_id])
     @purchase_buyers = PurchaseBuyer.new
+    @product = Product.find(params[:product_id])
+    if current_user == @product.user
+       redirect_to root_path
+      end
   end
 
   def create
@@ -30,5 +36,12 @@ class PurchasesController < ApplicationController
       card: params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def sold
+    @product = Product.find(params[:product_id])
+    if @product.purchase.present?
+      redirect_to root_path
+    end
   end
 end
