@@ -74,6 +74,11 @@ RSpec.describe PurchaseBuyer, type: :model do
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Product can't be blank")
       end
+      it "tokenが空では登録できないこと" do
+        @purchase_buyer.token = nil
+        @purchase_buyer.valid?
+        expect(@purchase_buyer.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
