@@ -8,6 +8,7 @@ class Product < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  has_one :purchase
 
   validates :name, :explain, :image, presence: true
   validates :price,
