@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :sold, only: :edit
 
-  
   def index
     @products = Product.all.order('created_at DESC')
   end
@@ -22,13 +21,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-    unless current_user.id == @product.user_id
-      redirect_to action: :index
-    end
+    return if current_user.id == @product.user_id
+
+    redirect_to action: :index
   end
 
   def update
@@ -40,24 +38,24 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @product.user_id
-      @product.destroy
-    end
-      redirect_to root_path
+    @product.destroy if current_user.id == @product.user_id
+    redirect_to root_path
   end
 
   private
+
   def set_product
     @product = Product.find(params[:id])
   end
 
   def product_params
-    params.require(:product).permit(:name, :explain, :price, :category_id, :status_id, :shipping_cost_id, :region_id,:shipping_date_id, :image).merge(user_id: current_user.id)
+    params.require(:product).permit(:name, :explain, :price, :category_id, :status_id, :shipping_cost_id, :region_id,
+                                    :shipping_date_id, :image).merge(user_id: current_user.id)
   end
 
   def sold
-    if @product.purchase.present?
-      redirect_to root_path
-    end
+    return unless @product.purchase.present?
+
+    redirect_to root_path
   end
 end

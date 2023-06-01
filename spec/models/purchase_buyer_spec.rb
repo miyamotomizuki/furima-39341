@@ -22,12 +22,12 @@ RSpec.describe PurchaseBuyer, type: :model do
       it 'post_codeが空だと購入できない' do
         @purchase_buyer.post_code = ''
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Post code can't be blank")
+        expect(@purchase_buyer.errors.full_messages).to include('Post code is invalid')
       end
       it 'post_codeは「3桁ハイフン4桁」の半角文字列のみ保存可能なこと' do
         @purchase_buyer.post_code = '1234567'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_buyer.errors.full_messages).to include('Post code is invalid')
       end
       it 'cityが空だと購入できない' do
         @purchase_buyer.city = ''
@@ -42,22 +42,22 @@ RSpec.describe PurchaseBuyer, type: :model do
       it 'phoneが空だと購入できない' do
         @purchase_buyer.phone = ''
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Phone can't be blank")
+        expect(@purchase_buyer.errors.full_messages).to include('Phone is invalid')
       end
       it 'phoneは9桁以下だと購入できない' do
         @purchase_buyer.phone = '123456789'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Phone is invalid")
+        expect(@purchase_buyer.errors.full_messages).to include('Phone is invalid')
       end
       it 'phoneは12桁以上だと購入できない' do
         @purchase_buyer.phone = '123456789123'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Phone is invalid")
+        expect(@purchase_buyer.errors.full_messages).to include('Phone is invalid')
       end
       it 'numberは半角数字以外が含まれている場合だと購入できない' do
-        @purchase_buyer.phone  = '090-1234'
+        @purchase_buyer.phone = '090-1234'
         @purchase_buyer.valid?
-        expect(@purchase_buyer.errors.full_messages).to include("Phone is invalid")
+        expect(@purchase_buyer.errors.full_messages).to include('Phone is invalid')
       end
       it 'region_idに「1」が選択されている場合は出品できない' do
         @purchase_buyer.region_id = '1'
@@ -70,11 +70,11 @@ RSpec.describe PurchaseBuyer, type: :model do
         expect(@purchase_buyer.errors.full_messages).to include("User can't be blank")
       end
       it 'productが紐付いていなければ購入できない' do
-        @purchase_buyer.product_id= nil
+        @purchase_buyer.product_id = nil
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Product can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @purchase_buyer.token = nil
         @purchase_buyer.valid?
         expect(@purchase_buyer.errors.full_messages).to include("Token can't be blank")

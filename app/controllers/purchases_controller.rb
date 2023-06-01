@@ -1,13 +1,13 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :sold
-  
+
   def index
     @purchase_buyers = PurchaseBuyer.new
     @product = Product.find(params[:product_id])
-    if current_user == @product.user
-       redirect_to root_path
-      end
+    return unless current_user == @product.user
+
+    redirect_to root_path
   end
 
   def create
@@ -21,16 +21,17 @@ class PurchasesController < ApplicationController
       render :index
     end
   end
-  
-  
+
   private
 
   def purchase_params
-    params.require(:purchase_buyer).permit(:post_code, :city, :block, :building, :phone, :region_id).merge(user_id: current_user.id, product_id: @product.id,token: params[:token])
+    params.require(:purchase_buyer).permit(:post_code, :city, :block, :building, :phone, :region_id).merge(
+      user_id: current_user.id, product_id: @product.id, token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
       amount: @product.price,  # 商品の値段
       card: params[:token],    # カードトークン
@@ -40,8 +41,8 @@ class PurchasesController < ApplicationController
 
   def sold
     @product = Product.find(params[:product_id])
-    if @product.purchase.present?
-      redirect_to root_path
-    end
+    return unless @product.purchase.present?
+
+    redirect_to root_path
   end
 end
