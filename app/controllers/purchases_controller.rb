@@ -1,17 +1,16 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product
   before_action :sold
 
   def index
     @purchase_buyers = PurchaseBuyer.new
-    @product = Product.find(params[:product_id])
     return unless current_user == @product.user
 
     redirect_to root_path
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @purchase_buyers = PurchaseBuyer.new(purchase_params)
     if @purchase_buyers.valid?
       pay_item
@@ -44,5 +43,9 @@ class PurchasesController < ApplicationController
     return unless @product.purchase.present?
 
     redirect_to root_path
+  end
+
+  def set_product
+    @product = Product.find(params[:product_id])
   end
 end
