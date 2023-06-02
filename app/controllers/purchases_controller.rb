@@ -39,9 +39,7 @@ class PurchasesController < ApplicationController
   end
 
   def sold
-    @product = Product.find(params[:product_id])
     return unless @product.purchase.present?
-
     redirect_to root_path
   end
 
