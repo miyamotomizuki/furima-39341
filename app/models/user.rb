@@ -17,4 +17,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{8,}\z/ }, allow_blank: true
 
   has_many :products
+  has_many :purchases
 end
