@@ -340,6 +340,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano3-unicorn
   capybara (>= 2.15)
+  date (= 3.3.3)
   devise
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
